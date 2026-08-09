@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c0c14"/>
+      <stop offset="1" stop-color="#1a0f2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c8ff3d"/>
+      <stop offset="1" stop-color="#67e8f9"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.38" r="0.6">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#halo)"/>
+  <!-- duotone geometric portrait -->
+  <g transform="translate(400 430)">
+    <!-- shoulders -->
+    <path d="M-200 300 L-230 330 Q-60 380 0 380 Q60 380 230 330 L200 300 Z" fill="#c8ff3d" opacity="0.85"/>
+    <!-- neck -->
+    <rect x="-42" y="70" width="84" height="90" fill="#c8ff3d" opacity="0.7"/>
+    <!-- head -->
+    <circle r="170" fill="#67e8f9" opacity="0.9"/>
+    <!-- face plane (left-lit) -->
+    <path d="M-170 0 A170 170 0 0 1 80 -150 L80 160 A170 170 0 0 1 -170 0 Z" fill="#0c0c14" opacity="0.9"/>
+    <!-- hair block -->
+    <path d="M-180 -40 A180 180 0 0 1 120 -150 Q80 -190 0 -196 Q-100 -190 -180 -40 Z" fill="#0c0c14"/>
+    <!-- visor line -->
+    <path d="M-80 -20 L40 -60" stroke="#c8ff3d" stroke-width="8" stroke-linecap="round"/>
+    <path d="M40 -60 L96 -32" stroke="#c8ff3d" stroke-width="8" stroke-linecap="round"/>
+    <!-- highlight -->
+    <circle cx="-120" cy="60" r="34" fill="#c8ff3d" opacity="0.35"/>
+  </g>
+  <g stroke="#67e8f9" stroke-opacity="0.25" stroke-width="1">
+    <line x1="0" y1="0" x2="800" y2="0"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="0" y1="1000" x2="800" y2="1000"/>
+  </g>
+  <text x="40" y="80" font-family="monospace" font-size="18" letter-spacing="6" fill="#c8ff3d">AKASH VERMA — 2026</text>
+  <text x="40" y="950" font-family="monospace" font-size="14" letter-spacing="4" fill="#9aa1ac">FULL-STACK ENGINEER × PRODUCT DESIGNER</text>
+</svg>

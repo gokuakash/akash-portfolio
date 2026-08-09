@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a130f"/>
+      <stop offset="1" stop-color="#10241b"/>
+    </linearGradient>
+    <radialGradient id="globe" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.8"/>
+      <stop offset="0.85" stop-color="#34d399" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <g stroke="#2dd4bf" stroke-opacity="0.09" stroke-width="1">
+    <line x1="0" y1="500" x2="1600" y2="500"/>
+    <line x1="800" y1="0" x2="800" y2="1000"/>
+  </g>
+  <!-- globe -->
+  <g transform="translate(800 480)">
+    <circle r="300" fill="url(#globe)"/>
+    <circle r="300" fill="none" stroke="#34d399" stroke-width="2" stroke-opacity="0.8"/>
+    <ellipse rx="300" ry="110" fill="none" stroke="#67e8f9" stroke-width="1.2" stroke-opacity="0.5"/>
+    <ellipse ry="300" rx="105" fill="none" stroke="#67e8f9" stroke-width="1.2" stroke-opacity="0.5"/>
+    <path d="M-300 -60 Q0 -160 300 -60" fill="none" stroke="#c8ff3d" stroke-width="2" stroke-opacity="0.8"/>
+    <path d="M-300 90 Q0 190 300 90" fill="none" stroke="#c8ff3d" stroke-width="2" stroke-opacity="0.5"/>
+    <g fill="#c8ff3d">
+      <circle cx="-150" cy="-40" r="6"/>
+      <circle cx="60" cy="120" r="5"/>
+      <circle cx="-40" cy="-140" r="4"/>
+    </g>
+    <g fill="#67e8f9">
+      <circle cx="180" cy="160" r="5"/>
+      <circle cx="220" cy="-110" r="4"/>
+    </g>
+  </g>
+  <g font-family="monospace">
+    <text x="80" y="180" font-size="52" letter-spacing="8" fill="#d5ffe8">TERRA</text>
+    <text x="80" y="235" font-size="15" letter-spacing="4" fill="#2dd4bf">CLIMATE INTELLIGENCE / WEBGL / WASM</text>
+    <text x="80" y="900" font-size="44" letter-spacing="3" fill="#c8ff3d">1.4M TILES/DAY · −63% LATENCY</text>
+  </g>
+  <text x="1240" y="900" font-size="20" letter-spacing="4" fill="#67e8f9">60FPS GLOBE</text>
+</svg>

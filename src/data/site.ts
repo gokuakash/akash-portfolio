@@ -1,0 +1,56 @@
+// ---------------------------------------------------------------------------
+// Site-level content: identity, navigation, socials, metrics.
+// Single source of truth — consumed by layout, hero, footer, SEO.
+// ---------------------------------------------------------------------------
+
+export const site = {
+  name: "Akash.S",
+  fullName: "Akash.S",
+  role: "Full-Stack Engineer & Product Designer",
+  tagline: "I design and engineer digital products that feel inevitable.",
+  location: "Bengaluru, India · UTC+5:30",
+  email: "vewo.works@gmail.com",
+  domain: "https://akashverma.dev",
+  availability: "Currently booking new projects for Q4 2026.",
+} as const;
+
+export const nav = [
+  { index: "01", label: "Story", href: "#story" },
+  { index: "02", label: "Work", href: "#work" },
+  { index: "03", label: "Journey", href: "#journey" },
+  { index: "04", label: "Contact", href: "#contact" },
+] as const;
+
+export const socials = [
+  { label: "GitHub", handle: "@akashverma", url: "https://github.com/akashverma" },
+  { label: "LinkedIn", handle: "/in/akash-verma", url: "https://linkedin.com/in/akash-verma" },
+  { label: "X / Twitter", handle: "@akashbuilds", url: "https://x.com/akashbuilds" },
+  { label: "Email", handle: site.email, url: `mailto:${site.email}` },
+] as const;
+
+/** Hero bottom-strip metrics — scrolled into view after first interaction. */
+export interface Metric {
+  value: number;
+  suffix: string;
+  label: string;
+  decimals?: number;
+}
+
+export const metrics: readonly Metric[] = [
+  { value: 8, suffix: "+", label: "Years shipping products" },
+  { value: 42, suffix: "", label: "Products launched" },
+  { value: 99, suffix: "", label: "Avg. Lighthouse score" },
+  { value: 8.2, suffix: "k", label: "OSS GitHub stars", decimals: 1 },
+] as const;
+
+/** Marquee of client / partner wordmarks (rendered as styled text, no logos). */
+export const clients = [
+  "Nova Bank",
+  "Helio Health",
+  "Opal Labs",
+  "Fathom AI",
+  "Gridline",
+  "Polaris",
+  "Verdi",
+  "Northbeam",
+] as const;

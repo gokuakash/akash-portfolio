@@ -1,0 +1,48 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 1944 >>
+stream
+BT /F1 22 Tf 60 760 Td (AKASH VERMA) Tj ET
+BT /F1 10 Tf 60 718.2 Td (Full-Stack Engineer & Product Designer  |  Bengaluru, India  |  hello@akashverma.dev  |  akashverma.dev) Tj ET
+BT /F1 10 Tf 60 699.2 Td () Tj ET
+BT /F1 13 Tf 60 680.2 Td (EXPERIENCE) Tj ET
+BT /F1 10 Tf 60 655.5 Td (Senior Full-Stack Engineer - Northbeam \(2022-present\): Owned checkout & billing end-to-end; +37% client activation in 90 days; founded the 12-person Design Engineering guild; co-created the AI copilot program reaching 61% of accounts.) Tj ET
+BT /F1 10 Tf 60 636.5 Td (Product Engineer - Lumen Health \(2019-2022\): Led a 6-person squad rebuilding the patient portal; engagement +54%; shipped HIPAA-compliant video visits used by 240+ clinics; earned WCAG 2.1 AA for the suite.) Tj ET
+BT /F1 10 Tf 60 617.5 Td (Frontend Engineer - Pixelform \(2017-2019\): Cut bundle size 41%; built the internal charting library; introduced motion review checklists that trimmed review cycles 2.4x.) Tj ET
+BT /F1 13 Tf 60 598.5 Td (EDUCATION) Tj ET
+BT /F1 10 Tf 60 573.8 Td (B.Tech Computer Science, VIT Vellore \(2013-2017\) - CGPA 8.6; thesis on gaze-aware interface adaptation; founded the design club.) Tj ET
+BT /F1 13 Tf 60 554.8 Td (SELECTED WORK) Tj ET
+BT /F1 10 Tf 60 530.0999999999999 Td (Pulse - AI-powered fintech dashboard. +37% activation, -42% tickets, 1.2s TTI.) Tj ET
+BT /F1 10 Tf 60 511.0999999999999 Td (Aurora - Headless D2C storefront. 0.9s LCP, +23% conversion, +18% AOV.) Tj ET
+BT /F1 10 Tf 60 492.0999999999999 Td (Terra - Climate-intelligence 3D globe. 1.4M tiles/day, -63% latency.) Tj ET
+BT /F1 10 Tf 60 473.0999999999999 Td (Muse - Open-source design & motion system. 8.2k stars, 96% reuse across 12 teams.) Tj ET
+BT /F1 13 Tf 60 454.0999999999999 Td (SKILLS) Tj ET
+BT /F1 10 Tf 60 429.3999999999999 Td (TypeScript, Next.js, React, Node, Postgres, Redis, Three.js/R3F, WebGL shaders, d3, design tokens, WCAG 2.2, motion systems, leadership.) Tj ET
+
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000002237 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2307
+%%EOF

@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+   DESIGN SYSTEM — Akash Portfolio (2026)
+   ---------------------------------------------------------------------
+   Architecture:
+   1. Base tokens as RGB triplets (so Tailwind's alpha channel works).
+   2. `.light` (default) and `.dark` theme blocks flip every token.
+   3. Component utilities: glass, noise, grid-paper, fluid type scale.
+   4. Accessibility: focus-visible rings, reduced-motion kill-switch,
+      touch-target sizing, custom scrollbar + selection.
+   ===================================================================== */
+
+/* 1. THEME TOKENS ------------------------------------------------ */
+:root {
+  color-scheme: light dark;
+  /* Paper-light mode: matte warm white + deep violet + volt accents */
+  --bg: 244 243 239; /* #F4F3EF paper */
+  --surface: 255 255 255;
+  --ink: 12 12 18; /* near-black for AA+ contrast on paper */
+  --muted: 90 94 108;
+  --line: 12 12 18;
+  --accent: 88 61 245; /* violet #583DF5 — AA on paper */
+  --accent-2: 11 165 145; /* teal */
+  --glow: 88 61 245;
+  --nav-bg: rgba(244, 243, 239, 0.72);
+  --glass-line: rgba(12, 12, 18, 0.12);
+  --hero-glow: radial-gradient(60% 50% at 70% 30%, rgba(88, 61, 245, 0.35), transparent 70%);
+}
+
+.dark {
+  /* Low-light UX: matte graphite + "volt" neon glow */
+  --bg: 9 9 14; /* #09090E */
+  --surface: 16 16 23;
+  --ink: 245 245 248;
+  --muted: 154 159 172;
+  --line: 245 245 248;
+  --accent: 200 255 61; /* volt #C8FF3D */
+  --accent-2: 103 232 249; /* cyan */
+  --glow: 200 255 61;
+  --nav-bg: rgba(9, 9, 14, 0.66);
+  --glass-line: rgba(245, 245, 248, 0.12);
+  --hero-glow: radial-gradient(60% 50% at 30% 30%, rgba(200, 255, 61, 0.14), transparent 70%),
+    radial-gradient(45% 45% at 80% 70%, rgba(103, 232, 249, 0.12), transparent 70%);
+}
+
+/* 2. BASE -------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth; /* overridden by Lenis at runtime */
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--ink));
+    font-family: var(--font-inter), system-ui, sans-serif;
+    overflow-x: clip;
+    /* Reserve scrollbar space to avoid layout shift when modals open */
+    scrollbar-gutter: stable;
+  }
+
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--bg));
+  }
+
+  /* Slim, on-brand scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--bg));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--muted) / 0.35);
+    border-radius: 8px;
+    border: 2px solid rgb(var(--bg));
+  }
+
+  /* Hover state only revealed for keyboard users — accessibility first */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Touch targets: WCAG 2.5.8 (44×44px minimum).
+     Applied ONLY to real controls — inline text links must stay inline,
+     otherwise every paragraph link would blow up line spacing. */
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    min-height: 44px;
+  }
+  .touch-target {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Links get a functional, underlined-on-hover affordance */
+  a {
+    color: inherit;
+    text-underline-offset: 3px;
+  }
+}
+
+/* 3. COMPONENT UTILITIES ---------------------------------------- */
+@layer components {
+  /* Frosted glass — used for the sticky nav + modal overlays */
+  .glass {
+    background: var(--nav-bg);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border: 1px solid var(--glass-line);
+  }
+
+  /* Film-grain noise — a whisper of texture over the matte palette */
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Stark-grid paper — subtle blueprint lines behind hero & footer */
+  .grid-paper {
+    background-image: linear-gradient(rgb(var(--line) / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line) / 0.04) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  /* Focus-mode ambient background behind the hero 3D fallback */
+  .hero-aura {
+    background: var(--hero-glow);
+  }
+
+  /* Hide visually, keep in a11y tree (sr-only) */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 10000;
+    transform: translateY(-200%);
+    transition: transform 0.25s ease;
+    background: rgb(var(--accent));
+    color: rgb(var(--bg));
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
+
+/* 4. FLUID TYPOGRAPHY — scales from 4K (2560px) down to 320px phones */
+@layer utilities {
+  /* Massive kinetic hero type — sized to fit 3 lines inside a 100svh hero
+     on a 1080p laptop: 10.5vw ≈ 151px at 1440px, capped for 4K. */
+  .type-hero {
+    font-size: clamp(3.2rem, 10.5vw, 9.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+  .type-mega {
+    font-size: clamp(2.6rem, 8.5vw, 8.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+  .type-display {
+    font-size: clamp(1.75rem, 4.6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .type-lede {
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    line-height: 1.6;
+  }
+  .type-micro {
+    font-size: clamp(0.7rem, 0.8vw, 0.8rem);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+}
+
+/* 5. REDUCED MOTION — kill every animation, keep the meaning */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 6. CUSTOM CURSOR — hide native pointer only on precise devices */
+@media (pointer: fine) {
+  body.has-cursor,
+  body.has-cursor a,
+  body.has-cursor button,
+  body.has-cursor [data-cursor] {
+    cursor: none;
+  }
+}
