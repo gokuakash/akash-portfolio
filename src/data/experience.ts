@@ -91,4 +91,4 @@ export const facts = [
   "99 Lighthouse, averaged",
 ] as const;
 
-export const resumeUrl = "/resume-akash-verma-2026.pdf";
+export const resumeUrl = "/resume-akash-s-2026.pdf";

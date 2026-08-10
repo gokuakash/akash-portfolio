@@ -37,7 +37,6 @@ export interface Project {
   process: ProcessPhase[];
   results: Kpi[];
   live: string;
-  repo: string;
 }
 
 export const categories = [
@@ -93,8 +92,6 @@ export const projects: Project[] = [
       { value: 1.2, suffix: "s", decimals: 1, label: "Time-to-interactive (was 4.8s)" },
       { value: 99.2, suffix: "%", decimals: 1, label: "Uptime over 12 months" },
     ],
-    live: "https://pulse.novabank.example",
-    repo: "https://github.com/akashverma/pulse",
   },
   {
     id: "aurora",
@@ -140,8 +137,6 @@ export const projects: Project[] = [
       { value: 18, suffix: "%", label: "Average order value growth" },
       { value: 64, suffix: "%", label: "Mobile bounce-rate reduction" },
     ],
-    live: "https://aurora.heliohealth.example",
-    repo: "https://github.com/akashverma/aurora",
   },
   {
     id: "terra",
@@ -187,8 +182,6 @@ export const projects: Project[] = [
       { value: 31, suffix: "", label: "NGOs onboarded" },
       { value: 2, suffix: "×", label: "Design awards won" },
     ],
-    live: "https://terra.opallabs.example",
-    repo: "https://github.com/akashverma/terra",
   },
   {
     id: "muse",
@@ -234,7 +227,5 @@ export const projects: Project[] = [
       { value: 74, suffix: "%", label: "Faster design-to-dev time" },
       { value: 41, suffix: "k", label: "Downloads / month" },
     ],
-    live: "https://muse.akashverma.dev",
-    repo: "https://github.com/akashverma/muse",
   },
 ];

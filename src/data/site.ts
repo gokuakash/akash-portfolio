@@ -10,7 +10,9 @@ export const site = {
   tagline: "I design and engineer digital products that feel inevitable.",
   location: "Bengaluru, India · UTC+5:30",
   email: "vewo.works@gmail.com",
-  domain: "https://akashverma.dev",
+  phone: "+91 96554 58315",
+  phoneHref: "tel:+919655458315",
+  domain: "https://akashs.dev",
   availability: "Currently booking new projects for Q4 2026.",
 } as const;
 
@@ -22,9 +24,8 @@ export const nav = [
 ] as const;
 
 export const socials = [
-  { label: "GitHub", handle: "@akashverma", url: "https://github.com/akashverma" },
-  { label: "LinkedIn", handle: "/in/akash-verma", url: "https://linkedin.com/in/akash-verma" },
-  { label: "X / Twitter", handle: "@akashbuilds", url: "https://x.com/akashbuilds" },
+  { label: "Phone", handle: site.phone, url: site.phoneHref },
+  { label: "GitHub", handle: "@akashs", url: "https://github.com/akashs" },
   { label: "Email", handle: site.email, url: `mailto:${site.email}` },
 ] as const;
 

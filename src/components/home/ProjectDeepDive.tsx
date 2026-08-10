@@ -64,9 +64,13 @@ export function ProjectDeepDive({ project, onClose }: ProjectDeepDiveProps) {
           aria-modal="true"
           aria-labelledby="dd-title"
         >
+          {/* data-lenis-prevent: Lenis swallows wheel events even when
+              stopped (it preventDefaults them) — this opts the card's own
+              scroll container out of Lenis's wheel handling. */}
           <motion.div
             ref={dialogRef}
-            className="relative mx-auto my-6 w-[min(1080px,94vw)] overflow-hidden rounded-3xl border border-line/15 bg-surface shadow-2xl md:my-12"
+            data-lenis-prevent
+            className="relative mx-auto my-6 max-h-[calc(100svh-3rem)] w-[min(1080px,94vw)] overflow-y-auto overscroll-contain rounded-3xl border border-line/15 bg-surface shadow-2xl md:my-12 md:max-h-[calc(100svh-6rem)]"
             initial={{ y: 60, scale: 0.98 }}
             animate={{ y: 0, scale: 1 }}
             exit={{ y: 40, scale: 0.98 }}
@@ -103,15 +107,15 @@ export function ProjectDeepDive({ project, onClose }: ProjectDeepDiveProps) {
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href={project.live} target="_blank" rel="noreferrer" data-cursor="link" className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-bg shadow-glow-sm transition hover:brightness-110">
-                  Live site ↗
-                </a>
-                <a href={project.repo} target="_blank" rel="noreferrer" data-cursor="link" className="inline-flex h-11 items-center gap-2 rounded-full border border-line/20 px-5 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden>
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.235-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.813 1.102.813 2.22 0 1.604-.015 2.898-.015 3.293 0 .32.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.63-5.37-12-12-12Z" />
+                {/* Client work ships under NDA — the code stays private, and we
+                    say so plainly instead of linking to nothing. */}
+                <span className="inline-flex h-11 items-center gap-2 rounded-full border border-line/20 px-5 text-sm font-medium text-muted">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
-                  GitHub
-                </a>
+                  Private client · code under NDA
+                </span>
               </div>
             </header>
 
@@ -202,7 +206,10 @@ export function ProjectDeepDive({ project, onClose }: ProjectDeepDiveProps) {
             {/* ---- Footer note ---- */}
             <footer className="border-t border-line/10 p-6 text-center text-sm text-muted md:p-8">
               Want the full teardown — architecture diagrams, trade-offs, and the numbers I didn&apos;t
-              hit? <a href={project.repo} target="_blank" rel="noreferrer" className="font-semibold text-accent underline underline-offset-4">Read the repo notes →</a>
+              hit? It&apos;s shared with clients under NDA, but I&apos;m happy to walk you through it{" "}
+              <a href="#contact" className="font-semibold text-accent underline underline-offset-4">
+                in person →
+              </a>
             </footer>
           </motion.div>
         </motion.div>

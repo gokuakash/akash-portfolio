@@ -2,12 +2,14 @@
 
 // ---------------------------------------------------------------------------
 // HeroScene — the abstract interactive 3D background (R3F + three).
-//  - A 2,000-particle "starfield dust" shader that waves with time, reacts
-//    to the mouse, and drifts subtly as the user scrolls (scrollytelling).
+//  - A particle "starfield dust" shader that waves with time, reacts to the
+//    mouse, and drifts subtly as the user scrolls (scrollytelling).
 //  - A matte, distorted glass orb as the physical anchor with neon rim light.
 //  - Performance guards: capped DPR, antialiasing off, and the parent only
-//    mounts this whole component when `canRunWebGL()` is true (touch /
-//    reduced-motion / weak devices get the CSS `.hero-aura` fallback).
+//    mounts this whole component when `canRunWebGL()` / `canRunMobileWebGL()`
+//    are true. Touch devices get the `mobile` budget: fewer particles, no
+//    distortion shader, lower orb tessellation. Weak / reduced-motion devices
+//    get the CSS `.hero-aura` fallback.
 // ---------------------------------------------------------------------------
 
 import { useFrame, useThree } from "@react-three/fiber";
@@ -67,12 +69,11 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-function ParticleField() {
+function ParticleField({ count = 2000 }: { count?: number }) {
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const { pointer } = useThree();
 
   const { positions, scales } = useMemo(() => {
-    const count = 2000;
     const positions = new Float32Array(count * 3);
     const scales = new Float32Array(count);
     for (let i = 0; i < count; i++) {
@@ -86,7 +87,7 @@ function ParticleField() {
       scales[i] = 0.6 + Math.random() * 1.6;
     }
     return { positions, scales };
-  }, []);
+  }, [count]);
 
   useFrame((state) => {
     const mat = matRef.current;
@@ -126,25 +127,31 @@ function ParticleField() {
 }
 
 /** The distorted matte orb — the minimal-brutalist centerpiece. */
-function Orb() {
+function Orb({ lowQuality = false }: { lowQuality?: boolean }) {
   return (
     <Float speed={1.4} rotationIntensity={0.6} floatIntensity={1.2}>
       <mesh scale={1.35}>
-        <icosahedronGeometry args={[1, 12]} />
-        <MeshDistortMaterial
-          color="#101018"
-          roughness={0.15}
-          metalness={0.9}
-          distort={0.32}
-          speed={1.6}
-          envMapIntensity={0.2}
-        />
+        <icosahedronGeometry args={[1, lowQuality ? 6 : 12]} />
+        {lowQuality ? (
+          // Mobile budget: the distortion shader is the heavy part — a plain
+          // matte material keeps the rim lights doing the talking.
+          <meshStandardMaterial color="#101018" roughness={0.3} metalness={0.85} />
+        ) : (
+          <MeshDistortMaterial
+            color="#101018"
+            roughness={0.15}
+            metalness={0.9}
+            distort={0.32}
+            speed={1.6}
+            envMapIntensity={0.2}
+          />
+        )}
       </mesh>
     </Float>
   );
 }
 
-export function HeroScene() {
+export function HeroScene({ mobile = false }: { mobile?: boolean }) {
   return (
     <>
       {/* Neon rim lights (volt + violet) against the matte orb */}
@@ -152,8 +159,8 @@ export function HeroScene() {
       <pointLight position={[-5, 3, 4]} intensity={14} color="#c8ff3d" />
       <pointLight position={[5, -3, -4]} intensity={10} color="#67e8f9" />
       <pointLight position={[2, 4, -3]} intensity={8} color="#8b5cf6" />
-      <ParticleField />
-      <Orb />
+      <ParticleField count={mobile ? 700 : 2000} />
+      <Orb lowQuality={mobile} />
     </>
   );
 }

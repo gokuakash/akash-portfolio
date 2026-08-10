@@ -7,26 +7,50 @@
 // ---------------------------------------------------------------------------
 
 import { motion, useMotionValue, useSpring } from "motion/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { testimonials } from "@/data/insights";
 
-const CARD_W = 340;
+const CARD_W = 340; // desktop design width — the measure hook overrides at runtime
 const GAP = 24;
 
 export function Testimonials() {
   const [index, setIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+  // Real rendered card width — cards are min(88vw, 340px), so snap offsets
+  // must follow the live layout, not the desktop constant.
+  const [cardW, setCardW] = useState(CARD_W);
   const x = useMotionValue(0);
   const xSpring = useSpring(x, { stiffness: 160, damping: 24 });
 
-  const maxX = Math.max(0, testimonials.length * (CARD_W + GAP) - GAP - CARD_W);
+  const step = cardW + GAP;
+  const maxX = Math.max(0, testimonials.length * step - GAP - cardW);
+
+  // Measure the first card (ResizeObserver handles rotation / resizing).
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const measure = () => {
+      const first = track.querySelector<HTMLElement>("figure");
+      if (first) setCardW(first.offsetWidth);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(track);
+    return () => ro.disconnect();
+  }, []);
+
+  // If the layout changes under a snapped card (resize, rotation), re-snap.
+  useEffect(() => {
+    x.set(-index * (cardW + GAP));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardW]);
 
   const goTo = (i: number) => {
     const clamped = Math.max(0, Math.min(testimonials.length - 1, i));
     setIndex(clamped);
-    x.set(-clamped * (CARD_W + GAP));
+    x.set(-clamped * (cardW + GAP));
   };
 
   return (
@@ -53,7 +77,7 @@ export function Testimonials() {
       <Reveal className="mt-12">
         <div
           ref={trackRef}
-          className="overflow-x-visible overflow-y-hidden"
+          className="overflow-hidden"
           aria-roledescription="carousel"
           aria-label="Client testimonials"
         >

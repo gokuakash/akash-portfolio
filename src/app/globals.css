@@ -46,6 +46,20 @@
     radial-gradient(45% 45% at 80% 70%, rgba(103, 232, 249, 0.12), transparent 70%);
 }
 
+/* Portrait hero — the aura is re-anchored for tall touch screens. Desktop
+   gradients cover the corners of a landscape viewport; on mobile they'd leave
+   the frame flat, so the glow moves up behind the headline and grows. */
+@media (max-width: 768px) {
+  :root {
+    --hero-glow: radial-gradient(85% 60% at 50% 12%, rgba(88, 61, 245, 0.4), transparent 72%),
+      radial-gradient(60% 45% at 82% 82%, rgba(11, 165, 145, 0.22), transparent 72%);
+  }
+  .dark {
+    --hero-glow: radial-gradient(90% 62% at 50% 10%, rgba(200, 255, 61, 0.2), transparent 72%),
+      radial-gradient(70% 50% at 85% 85%, rgba(103, 232, 249, 0.16), transparent 72%);
+  }
+}
+
 /* 2. BASE -------------------------------------------------------- */
 @layer base {
   html {
@@ -176,10 +190,11 @@
 
 /* 4. FLUID TYPOGRAPHY — scales from 4K (2560px) down to 320px phones */
 @layer utilities {
-  /* Massive kinetic hero type — sized to fit 3 lines inside a 100svh hero
-     on a 1080p laptop: 10.5vw ≈ 151px at 1440px, capped for 4K. */
+  /* Massive kinetic hero type — sized to fit 3 lines inside a 100svh hero.
+     Height-aware (14vh term): laptops and short viewports scale the headline
+     down so nothing clips, while 9.5rem keeps the 4K ceiling. */
   .type-hero {
-    font-size: clamp(3.2rem, 10.5vw, 9.5rem);
+    font-size: clamp(2.6rem, min(9.5vw, 14vh), 9.5rem);
     line-height: 0.95;
     letter-spacing: -0.045em;
   }

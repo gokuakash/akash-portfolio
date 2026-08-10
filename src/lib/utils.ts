@@ -35,6 +35,17 @@ export function canRunWebGL() {
   return hasFinePointer() && !prefersReducedMotion() && !isLowPowerDevice();
 }
 
+/**
+ * Should the BUDGETED WebGL scene run on touch devices? Same cost rules as
+ * `canRunWebGL()` but without the fine-pointer requirement: modern phones
+ * (8+ cores, no reduced-motion) get a lighter scene — fewer particles, capped
+ * DPR, no distortion shader. Weak or motion-averse devices still get the CSS
+ * `.hero-aura` fallback.
+ */
+export function canRunMobileWebGL() {
+  return !prefersReducedMotion() && !isLowPowerDevice();
+}
+
 /** Safe clamped lerp helper. */
 export const clamp = (v: number, min = 0, max = 1) => Math.min(max, Math.max(min, v));
 

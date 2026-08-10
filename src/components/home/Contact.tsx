@@ -80,6 +80,9 @@ export function Contact() {
 
   const field = (key: keyof FormState, label: string, type = "text", rows?: number) => (
     <div className="relative">
+      {/* suppressHydrationWarning: voice-input browser extensions inject
+          attributes (e.g. data-voice-ready) before React hydrates — this is
+          the sanctioned pattern to ignore those attribute-only diffs. */}
       <input
         id={`f-${key}`}
         type={type}
@@ -90,6 +93,7 @@ export function Contact() {
         aria-describedby={errors[key] ? `err-${key}` : undefined}
         className="peer h-14 w-full rounded-xl border border-line/15 bg-bg/50 px-4 pt-4 text-ink outline-none transition-colors duration-300 focus:border-accent"
         autoComplete={key === "email" ? "email" : key === "name" ? "name" : "off"}
+        suppressHydrationWarning
       />
       <label
         htmlFor={`f-${key}`}
@@ -222,6 +226,7 @@ export function Contact() {
                         aria-invalid={!!errors.message}
                         aria-describedby={errors.message ? "err-message" : undefined}
                         className="peer w-full rounded-xl border border-line/15 bg-bg/50 px-4 pb-3 pt-6 text-ink outline-none transition-colors duration-300 focus:border-accent"
+                        suppressHydrationWarning
                       />
                       <label htmlFor="f-message" className="pointer-events-none absolute left-4 top-5 text-sm text-muted transition-all duration-300 peer-focus:top-2 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-accent peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-widest">
                         Tell me about the problem
@@ -268,12 +273,14 @@ export function Contact() {
           {/* ---- Direct channels ---- */}
           <div className="lg:col-span-5">
             <h3 className="type-micro text-muted">Or reach me directly</h3>
+            <p className="mt-2 text-sm text-muted">
+              Quick assistance or work? Call or WhatsApp — I usually reply within an hour.
+            </p>
             <ul className="mt-6 space-y-4">
               {[
                 { label: "Email", value: site.email, href: `mailto:${site.email}` },
-                { label: "GitHub", value: "github.com/akashverma", href: "https://github.com/akashverma" },
-                { label: "LinkedIn", value: "linkedin.com/in/akash-verma", href: "https://linkedin.com/in/akash-verma" },
-                { label: "X / Twitter", value: "@akashbuilds", href: "https://x.com/akashbuilds" },
+                { label: "Phone / WhatsApp", value: site.phone, href: site.phoneHref },
+                { label: "GitHub", value: "github.com/akashs", href: "https://github.com/akashs" },
               ].map((c) => (
                 <li key={c.label}>
                   <a

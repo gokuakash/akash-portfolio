@@ -11,7 +11,6 @@
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, useState } from "react";
-import { Button } from "@/components/ui/Button";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -169,19 +168,22 @@ export function About() {
             </Reveal>
 
             <Magnetic className="mt-12 inline-block">
-              <Button
-                variant="outline"
-                size="lg"
+              <a
                 href={resumeUrl}
                 download
-                className="group"
+                data-cursor="link"
+                className="group inline-flex h-12 items-center gap-3 rounded-full border border-line/25 pl-2 pr-6 transition-colors duration-300 hover:border-accent hover:text-accent"
               >
-                <span aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5">
+                <span
+                  aria-hidden
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-bg transition-transform duration-300 group-hover:-translate-y-0.5"
+                >
                   ⤓
                 </span>
-                Download CV / Resume
-                <span className="type-micro text-muted group-hover:text-accent transition-colors">PDF · 2026</span>
-              </Button>
+                <span className="text-sm font-semibold text-ink">Download CV</span>
+                <span aria-hidden className="h-4 w-px bg-line/20" />
+                <span className="type-micro text-muted">PDF · 2026</span>
+              </a>
             </Magnetic>
           </div>
         </div>

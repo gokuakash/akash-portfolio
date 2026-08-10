@@ -1,6 +1,6 @@
 # Akash.dev — 2026 Portfolio
 
-A production-grade, single-page portfolio for **Akash Verma** — full-stack engineer ×
+A production-grade, single-page portfolio for **Akash.S** — full-stack engineer ×
 product designer. Built on the 2026 design brief: minimalist brutalism, kinetic
 typography, functional motion, glassmorphism, and quantifiable storytelling.
 

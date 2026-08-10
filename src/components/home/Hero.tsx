@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/Button";
 import { KineticText } from "@/components/ui/KineticText";
 import { Counter } from "@/components/ui/Counter";
 import { metrics } from "@/data/site";
-import { canRunWebGL } from "@/lib/utils";
+import { canRunWebGL, canRunMobileWebGL } from "@/lib/utils";
 import { useHydratedEnv } from "@/lib/hooks";
 import { useScroll as useLenisScroll } from "@/components/providers/ScrollProvider";
 
@@ -38,8 +38,12 @@ export function Hero() {
   const { scrollTo } = useLenisScroll();
   // Hydration-safe WebGL gate: false during SSR and the first client render
   // (so the tree matches), then mounts the canvas after hydration.
+  // Desktop (fine pointer) gets the full scene; capable phones get a budgeted
+  // one — see `mobile`. Everyone else gets the CSS `.hero-aura` fallback.
   const hydrated = useHydratedEnv();
-  const isWebGL = hydrated && canRunWebGL();
+  const desktopWebGL = hydrated && canRunWebGL();
+  const isWebGL = desktopWebGL || (hydrated && canRunMobileWebGL());
+  const mobile = isWebGL && !desktopWebGL;
 
   // Scrollytelling: hero content drifts up + fades as the user scrolls.
   const contentY = useTransform(scrollY, [0, 700], [0, -120]);
@@ -52,7 +56,7 @@ export function Hero() {
     <section
       id="story"
       aria-label="Introduction"
-      className="relative grid min-h-[100svh] place-items-center overflow-hidden grid-paper"
+      className="noise relative grid min-h-[100svh] place-items-center overflow-hidden grid-paper"
     >
       {/* Ambient hero glow — always present (WebGL fallback + depth) */}
       <motion.div aria-hidden className="hero-aura absolute inset-0" style={{ opacity: glowOpacity }} />
@@ -66,8 +70,12 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.8, delay: 0.5 }}
         >
-          <Canvas dpr={[1, 1.75]} gl={{ antialias: false, powerPreference: "high-performance", alpha: true }} camera={{ position: [0, 0, 6], fov: 45 }}>
-            <HeroScene />
+          <Canvas
+            dpr={mobile ? [1, 1.25] : [1, 1.75]}
+            gl={{ antialias: false, powerPreference: "high-performance", alpha: true }}
+            camera={{ position: [0, 0, mobile ? 7.5 : 6], fov: mobile ? 60 : 45 }}
+          >
+            <HeroScene mobile={mobile} />
           </Canvas>
         </motion.div>
       )}
@@ -77,10 +85,28 @@ export function Hero() {
         className="relative z-10 mx-auto w-full max-w-7xl px-5 md:px-10"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        <p className="type-micro mb-6 flex items-center gap-3 text-muted">
-          <span className="inline-block h-px w-10 bg-accent" aria-hidden />
-          Akash.S — Full-Stack Engineer & Product Designer
-        </p>
+        {/* Glass identity chip — the first thing on the site. Frosted pill
+            over the 3D, monogram + role, short version on phones. */}
+        <motion.div
+          className="mb-6"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+        >
+          <span className="glass inline-flex items-center gap-2.5 rounded-full py-2 pl-2 pr-4 md:pr-5">
+            <span
+              aria-hidden
+              className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-bg"
+            >
+              AK
+            </span>
+            <span className="type-micro text-ink">
+              Akash.S —{" "}
+              <span className="hidden sm:inline">Full-Stack Engineer &amp; Product Designer</span>
+              <span className="sm:hidden">Engineer &amp; Designer</span>
+            </span>
+          </span>
+        </motion.div>
 
         {/* Kinetic headline: name fixed, value proposition rotates */}
         <h1 className="type-hero font-display font-extrabold tracking-tight">
@@ -100,11 +126,13 @@ export function Hero() {
           >
             builds
           </motion.span>
-          {/* Fixed-height slot (2em) so the headline never jumps as words
-              rotate and wrap across up to two lines within the container */}
+          {/* Fixed-height slot so the headline never jumps as words rotate.
+              xl+: with the vh-capped size the longest role fits one line, so
+              1.5em suffices; below xl (narrow windows can wrap to 2 lines)
+              the full 2em reserves the space. */}
           <KineticText
             words={ROLES}
-            className="block min-h-[2em] font-serif font-light italic text-accent"
+            className="block min-h-[2em] font-serif font-light italic text-accent xl:min-h-[1.5em]"
           />
         </h1>
 
@@ -156,12 +184,12 @@ export function Hero() {
           Positioned high enough (md:bottom-32) to never collide with the
           scroll cue sitting at the very bottom edge. */}
       <motion.dl
-        className="absolute bottom-32 left-1/2 z-10 hidden w-full max-w-6xl -translate-x-1/2 px-6 md:bottom-32 md:grid md:grid-cols-4 md:gap-6 md:px-10"
+        className="absolute bottom-36 left-1/2 z-10 grid w-full max-w-6xl -translate-x-1/2 grid-cols-2 gap-x-6 gap-y-6 px-6 md:bottom-32 md:grid-cols-4 md:gap-6 md:px-10"
         style={{ opacity: metricsOpacity }}
       >
         {metrics.map((m) => (
           <div key={m.label} className="border-l border-line/15 pl-4">
-            <dd className="font-display text-3xl font-bold">
+            <dd className="font-display text-2xl font-bold md:text-3xl">
               <Counter value={m.value} suffix={m.suffix} decimals={m.decimals ?? 0} />
             </dd>
             <dt className="type-micro mt-2 text-muted">{m.label}</dt>
