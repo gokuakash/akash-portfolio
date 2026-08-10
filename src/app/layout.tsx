@@ -87,7 +87,6 @@ const jsonLd = {
       telephone: "+91-9655458315",
       jobTitle: "Web Developer, Product Designer & SaaS Developer",
       image: `${site.domain}/images/portrait.svg`,
-      sameAs: ["https://github.com/akashs"],
       address: {
         "@type": "PostalAddress",
         addressLocality: "Bengaluru",

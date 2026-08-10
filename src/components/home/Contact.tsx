@@ -280,7 +280,6 @@ export function Contact() {
               {[
                 { label: "Email", value: site.email, href: `mailto:${site.email}` },
                 { label: "Phone / WhatsApp", value: site.phone, href: site.phoneHref },
-                { label: "GitHub", value: "github.com/akashs", href: "https://github.com/akashs" },
               ].map((c) => (
                 <li key={c.label}>
                   <a

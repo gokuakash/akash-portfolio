@@ -25,7 +25,6 @@ export const nav = [
 
 export const socials = [
   { label: "Phone", handle: site.phone, url: site.phoneHref },
-  { label: "GitHub", handle: "@akashs", url: "https://github.com/akashs" },
   { label: "Email", handle: site.email, url: `mailto:${site.email}` },
 ] as const;
 
