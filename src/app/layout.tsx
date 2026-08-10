@@ -35,37 +35,100 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: `${site.fullName} — ${site.role}`,
+    default: `${site.fullName} — Web Developer, Product Designer & SaaS Developer`,
     template: `%s · ${site.fullName}`,
   },
   description:
-    "Akash.S — full-stack engineer and product designer. Eight years turning ambiguous problems into measurable product outcomes: interfaces that convert, systems that scale, motion that matters.",
+    "Akash.S — web developer, web designer, product designer and SaaS developer in Bengaluru, India. Eight years turning ambiguous problems into measurable product outcomes: interfaces that convert, systems that scale, motion that matters.",
   keywords: [
-    "full-stack engineer",
+    "web developer",
+    "web designer",
     "product designer",
+    "saas developer",
+    "full-stack engineer",
     "design engineer",
     "Next.js developer",
+    "React developer",
+    "UI UX designer",
+    "website developer",
     "motion design",
     "Three.js",
+    "bengaluru web developer",
     "portfolio",
   ],
   openGraph: {
     type: "website",
+    locale: "en_IN",
     url: site.domain,
     siteName: site.fullName,
-    title: `${site.fullName} — ${site.role}`,
+    title: `${site.fullName} — Web Developer, Product Designer & SaaS Developer`,
     description: site.tagline,
-    images: [{ url: "/images/og.svg", width: 1200, height: 630, alt: site.tagline }],
+    images: [{ url: "/images/og.png", width: 1200, height: 630, alt: site.tagline }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.fullName} — ${site.role}`,
+    title: `${site.fullName} — Web Developer, Product Designer & SaaS Developer`,
     description: site.tagline,
-    creator: "@akashbuilds",
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
   icons: { icon: "/favicon.svg" },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${site.domain}/#person`,
+      name: site.fullName,
+      url: site.domain,
+      email: `mailto:${site.email}`,
+      telephone: "+91-9655458315",
+      jobTitle: "Web Developer, Product Designer & SaaS Developer",
+      image: `${site.domain}/images/portrait.svg`,
+      sameAs: ["https://github.com/akashs"],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bengaluru",
+        addressCountry: "IN",
+      },
+      knowsAbout: ["Web Development", "Web Design", "Product Design", "SaaS Development"],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site.domain}/#service`,
+      name: `${site.fullName} — Web Development, Web Design, Product Design & SaaS Development`,
+      url: site.domain,
+      telephone: "+91-9655458315",
+      email: site.email,
+      priceRange: "$$",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bengaluru",
+        addressCountry: "IN",
+      },
+      areaServed: { "@type": "City", name: "Bengaluru" },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Services",
+        itemListElement: [
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Developer" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Designer" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Product Designer" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "SaaS Developer" } },
+        ],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.domain}/#website`,
+      url: site.domain,
+      name: site.fullName,
+      publisher: { "@id": `${site.domain}/#person` },
+      inLanguage: "en",
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -85,6 +148,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RootProviders>
           <main id="main">{children}</main>
         </RootProviders>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   );

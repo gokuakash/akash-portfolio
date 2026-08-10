@@ -158,6 +158,38 @@ export function About() {
               </div>
             </Reveal>
 
+            {/* Services — exact-match keywords for search (and honest scope) */}
+            <Reveal delay={0.15}>
+              <ul className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2" aria-label="Services">
+                {[
+                  {
+                    title: "Web Developer",
+                    note: "React · Next.js · Node · fast, accessible, 99+ Lighthouse",
+                  },
+                  {
+                    title: "Web Designer",
+                    note: "Interfaces & design systems that convert and feel inevitable",
+                  },
+                  {
+                    title: "Product Designer",
+                    note: "UX, motion, and interaction for products people trust",
+                  },
+                  {
+                    title: "SaaS Developer",
+                    note: "Architecture, APIs and billing-grade systems at scale",
+                  },
+                ].map((s) => (
+                  <li
+                    key={s.title}
+                    className="rounded-2xl border border-line/10 bg-surface p-5 transition-colors duration-300 hover:border-accent/40"
+                  >
+                    <h3 className="font-semibold text-ink">{s.title}</h3>
+                    <p className="mt-1.5 text-sm text-muted">{s.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
             {/* Hybrid skills — D3 radar */}
             <Reveal delay={0.15} className="mt-12">
               <h3 className="type-micro mb-6 text-muted">Hybrid Skill Radar — UI/UX ↔ Engineering ↔ Leadership</h3>

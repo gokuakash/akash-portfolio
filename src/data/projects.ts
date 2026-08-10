@@ -36,7 +36,6 @@ export interface Project {
   solution: string[];
   process: ProcessPhase[];
   results: Kpi[];
-  live: string;
 }
 
 export const categories = [
