@@ -83,11 +83,7 @@ export function Projects() {
         </motion.ul>
 
         <p className="mt-10 text-center text-sm text-muted">
-          More experiments live on{" "}
-          <a href="https://github.com/akashs" target="_blank" rel="noreferrer" className="font-semibold text-accent underline underline-offset-4">
-            GitHub
-          </a>
-          .
+          More experiments are available on request — reach out for the code.
         </p>
       </div>
 
