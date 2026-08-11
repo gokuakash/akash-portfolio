@@ -110,7 +110,7 @@ export function Preloader() {
               className="flex flex-col items-center gap-5 text-center"
               exit={{ opacity: 0, y: -32, transition: { duration: 0.3 } }}
             >
-              <h1
+              <div
                 aria-hidden
                 className="font-display text-[clamp(2.75rem,8.5vw,7.5rem)] leading-none font-semibold tracking-[-0.045em]"
               >
@@ -130,7 +130,7 @@ export function Preloader() {
                     </motion.span>
                   </span>
                 ))}
-              </h1>
+              </div>
               <motion.p
                 className="type-micro text-muted"
                 initial={{ opacity: 0 }}
