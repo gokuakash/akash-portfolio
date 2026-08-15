@@ -15,6 +15,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 1,
+      images: [
+        // Swap in the real headshot here too once public/images/akash-portrait.jpg exists.
+        `${site.domain}/images/og.png`,
+      ],
     },
   ];
 }

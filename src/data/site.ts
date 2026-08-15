@@ -12,7 +12,9 @@ export const site = {
   email: "vewo.works@gmail.com",
   phone: "+91 96554 58315",
   phoneHref: "tel:+919655458315",
-  domain: "https://akashs.dev",
+  // Live origin Google will index. Override via NEXT_PUBLIC_SITE_URL in Vercel
+  // once a custom domain (e.g. akashs.dev) is connected — one env var, done.
+  domain: process.env.NEXT_PUBLIC_SITE_URL ?? "https://akash-portfolio-xi-six.vercel.app",
   availability: "Currently booking new projects for Q4 2026.",
 } as const;
 

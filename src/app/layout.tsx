@@ -71,6 +71,7 @@ export const metadata: Metadata = {
     description: site.tagline,
   },
   robots: { index: true, follow: true },
+  verification: { google: "F8_5ha3JqdJNnzH26tfwREgLmUOeqmEiEEw5L1yoNtI" },
   alternates: { canonical: "/" },
   icons: { icon: "/favicon.svg" },
 };
@@ -86,7 +87,11 @@ const jsonLd = {
       email: `mailto:${site.email}`,
       telephone: "+91-9655458315",
       jobTitle: "Web Developer, Product Designer & SaaS Developer",
-      image: `${site.domain}/images/portrait.svg`,
+      // Google only indexes real raster photos (JPEG/WEBP/PNG), not the SVG
+      // used on the page. Point this at /images/akash-portrait.jpg the moment
+      // a real headshot is dropped into public/images/ — Google will then
+      // surface it in image results and the knowledge panel.
+      image: `${site.domain}/images/og.png`,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Bengaluru",
