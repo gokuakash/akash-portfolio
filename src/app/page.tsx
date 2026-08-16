@@ -11,6 +11,7 @@ import { Projects } from "@/components/home/Projects";
 import { Experience } from "@/components/home/Experience";
 import { Insights } from "@/components/home/Insights";
 import { Testimonials } from "@/components/home/Testimonials";
+import { Journal } from "@/components/home/Journal";
 import { Contact } from "@/components/home/Contact";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -57,6 +58,7 @@ export default function Home() {
       </section>
       <Insights />
       <Testimonials />
+      <Journal />
       <Contact />
     </>
   );

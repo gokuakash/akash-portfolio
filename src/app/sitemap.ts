@@ -1,9 +1,10 @@
 // ---------------------------------------------------------------------------
-// Sitemap — single-page portfolio, but structured for crawlers anyway.
+// Sitemap — home + blog index + every article, each a crawlable URL.
 // ---------------------------------------------------------------------------
 
 import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
+import { posts } from "@/data/posts";
 
 export const dynamic = "force-static";
 
@@ -20,5 +21,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         `${site.domain}/images/og.png`,
       ],
     },
+    {
+      url: `${site.domain}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    ...posts.map((post) => ({
+      url: `${site.domain}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: "yearly" as const,
+      priority: 0.7,
+    })),
   ];
 }
