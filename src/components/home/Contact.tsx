@@ -301,7 +301,7 @@ export function Contact() {
               ))}
             </ul>
             <p className="mt-8 text-sm text-muted">
-              Based in <span className="font-semibold text-ink">Bengaluru, India</span> (UTC+5:30) — happy
+              Based in <span className="font-semibold text-ink">Chennai · Coimbatore · Bengaluru, India</span> (UTC+5:30) — happy
               to overlap with US/EU mornings.
             </p>
           </div>

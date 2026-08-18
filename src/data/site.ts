@@ -8,7 +8,7 @@ export const site = {
   fullName: "Akash.S",
   role: "Full-Stack Engineer & Product Designer",
   tagline: "I design and engineer digital products that feel inevitable.",
-  location: "Bengaluru, India · UTC+5:30",
+  location: "Chennai · Coimbatore · Bengaluru, India · UTC+5:30",
   email: "vewo.works@gmail.com",
   phone: "+91 96554 58315",
   phoneHref: "tel:+919655458315",

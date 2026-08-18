@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.fullName}`,
   },
   description:
-    "Akash.S — web developer, web designer and website creator in Bengaluru, India. Eight years turning ambiguous problems into measurable product outcomes: interfaces that convert, systems that scale, motion that matters.",
+    "Akash.S — web developer, web designer and website creator in Chennai, Coimbatore and Bengaluru, India. Eight years turning ambiguous problems into measurable product outcomes: interfaces that convert, systems that scale, motion that matters.",
   keywords: [
     "web developer",
     "web designer",
@@ -62,6 +62,10 @@ export const metadata: Metadata = {
     "akash s web developer",
     "bengaluru web developer",
     "bengaluru web designer",
+    "chennai web developer",
+    "chennai web designer",
+    "coimbatore web developer",
+    "coimbatore web designer",
     "portfolio",
   ],
   openGraph: {
@@ -100,7 +104,7 @@ const jsonLd = {
       image: `${site.domain}/images/og.png`,
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Bengaluru",
+        addressLocality: "Chennai",
         addressCountry: "IN",
       },
       knowsAbout: ["Web Development", "Web Design", "Website Creation", "Product Design", "SaaS Development"],
@@ -115,10 +119,14 @@ const jsonLd = {
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Bengaluru",
+        addressLocality: "Chennai",
         addressCountry: "IN",
       },
-      areaServed: { "@type": "City", name: "Bengaluru" },
+      areaServed: [
+        { "@type": "City", name: "Chennai" },
+        { "@type": "City", name: "Coimbatore" },
+        { "@type": "City", name: "Bengaluru" },
+      ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Services",
