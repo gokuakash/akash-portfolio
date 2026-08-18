@@ -102,8 +102,8 @@ export function Hero() {
             </span>
             <span className="type-micro text-ink">
               Akash.S —{" "}
-              <span className="hidden sm:inline">Web Developer · Product Designer · SaaS Developer</span>
-              <span className="sm:hidden">Web · Product · SaaS</span>
+              <span className="hidden sm:inline">Web Developer · Web Designer · Website Creator</span>
+              <span className="sm:hidden">Web · Design · Sites</span>
             </span>
           </span>
         </motion.div>

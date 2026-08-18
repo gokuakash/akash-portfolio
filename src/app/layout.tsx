@@ -35,14 +35,19 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: `${site.fullName} — Web Developer, Product Designer & SaaS Developer`,
+    default: `${site.fullName} — Web Developer, Web Designer & Website Creator`,
     template: `%s · ${site.fullName}`,
   },
   description:
-    "Akash.S — web developer, web designer, product designer and SaaS developer in Bengaluru, India. Eight years turning ambiguous problems into measurable product outcomes: interfaces that convert, systems that scale, motion that matters.",
+    "Akash.S — web developer, web designer and website creator in Bengaluru, India. Eight years turning ambiguous problems into measurable product outcomes: interfaces that convert, systems that scale, motion that matters.",
   keywords: [
     "web developer",
     "web designer",
+    "website creator",
+    "website designer",
+    "website developer",
+    "web design",
+    "web development",
     "product designer",
     "saas developer",
     "full-stack engineer",
@@ -53,7 +58,10 @@ export const metadata: Metadata = {
     "website developer",
     "motion design",
     "Three.js",
+    "akash web developer",
+    "akash s web developer",
     "bengaluru web developer",
+    "bengaluru web designer",
     "portfolio",
   ],
   openGraph: {
@@ -61,13 +69,13 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: site.domain,
     siteName: site.fullName,
-    title: `${site.fullName} — Web Developer, Product Designer & SaaS Developer`,
+    title: `${site.fullName} — Web Developer, Web Designer & Website Creator`,
     description: site.tagline,
     images: [{ url: "/images/og.png", width: 1200, height: 630, alt: site.tagline }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.fullName} — Web Developer, Product Designer & SaaS Developer`,
+    title: `${site.fullName} — Web Developer, Web Designer & Website Creator`,
     description: site.tagline,
   },
   robots: { index: true, follow: true },
@@ -86,23 +94,21 @@ const jsonLd = {
       url: site.domain,
       email: `mailto:${site.email}`,
       telephone: "+91-9655458315",
-      jobTitle: "Web Developer, Product Designer & SaaS Developer",
-      // Google only indexes real raster photos (JPEG/WEBP/PNG), not the SVG
-      // used on the page. Point this at /images/akash-portrait.jpg the moment
-      // a real headshot is dropped into public/images/ — Google will then
-      // surface it in image results and the knowledge panel.
+      jobTitle: "Web Developer, Web Designer & Website Creator",
+      // Google only indexes real raster photos (JPEG/WEBP/PNG). Point this at
+      // /images/akash-portrait.jpg once a real headshot exists in public/images/.
       image: `${site.domain}/images/og.png`,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Bengaluru",
         addressCountry: "IN",
       },
-      knowsAbout: ["Web Development", "Web Design", "Product Design", "SaaS Development"],
+      knowsAbout: ["Web Development", "Web Design", "Website Creation", "Product Design", "SaaS Development"],
     },
     {
       "@type": "ProfessionalService",
       "@id": `${site.domain}/#service`,
-      name: `${site.fullName} — Web Development, Web Design, Product Design & SaaS Development`,
+      name: `${site.fullName} — Web Development, Web Design & Website Creation`,
       url: site.domain,
       telephone: "+91-9655458315",
       email: site.email,
@@ -119,6 +125,7 @@ const jsonLd = {
         itemListElement: [
           { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Developer" } },
           { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Designer" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Website Creator" } },
           { "@type": "Offer", itemOffered: { "@type": "Service", name: "Product Designer" } },
           { "@type": "Offer", itemOffered: { "@type": "Service", name: "SaaS Developer" } },
         ],
